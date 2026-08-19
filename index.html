@@ -4,9 +4,74 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Oi Vida</title>
+    <style>
+        body{
+            background-color: #f6d4e5;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding-top: 40px;
+            overflow: hidden; /* Evita barra de rolagem quando o botão fugir */
+            height: 100vh;
+        }
+        h1{
+            font-size: 50px;
+            color: #d63384;
+        }
+
+        p{
+            font-size: 30px;
+            color: #6c1338ee;
+        }
+        button{
+            font-size: 20px;
+            padding: 10px 25px;
+            margin: 10px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            color: #9f0d7d;
+            font-weight: bold;
+        }
+
+        /* Deixa o botão 'Não' pronto para se mover pela tela */
+        #botaoNao {
+            position: relative;
+            transition: 0.1s;
+        }
+    </style>
 </head>
 <body>
-    <h1>Eu te amo minha vida!</h1>
+    <h1>Eu te amo minha vidaaaa !!!</h1>
+    <p>Tenho um presente para você...</p>
+    <p>você quer saber o que é meu amor? ❤️</p>
     
+    <button onclick="clicouSim()">Sim</button>
+    <!-- Adicionamos o id e os gatilhos de fuga para mouse e toque de celular -->
+    <button id="botaoNao" onmouseover="fugir()" ontouchstart="fugir()">Não</button>
+
+    <h2 id="resposta"></h2>
+    
+    <script>
+    function clicouSim() {
+        // Quando clicar, o JavaScript injeta o texto e o link bem aqui dentro
+        document.getElementById('resposta').innerHTML = `
+            <p>Oba! Te amo muito! ❤️🥰</p>
+            <p>Para receber o seu presente... <a href="https://cataas.com/cat/gif" target="_blank">clique aqui</a></p>
+        `;
+    }
+
+    function fugir() {
+        let botao = document.getElementById('botaoNao');
+        
+        // Sorteia uma posição aleatória na tela
+        let x = Math.random() * (window.innerWidth - 150);
+        let y = Math.random() * (window.innerHeight - 150);
+        
+        // Move o botão para a nova posição
+        botao.style.position = 'absolute';
+        botao.style.left = x + 'px';
+        botao.style.top = y + 'px';
+    }
+    </script>
 </body>
 </html>

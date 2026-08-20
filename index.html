@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Oi Vida</title>
+
     <style>
         body{
             background-color: #f6d4e5;
@@ -13,6 +14,7 @@
             overflow: hidden;
             height: 100vh;
         }
+
         h1{
             font-size: 50px;
             color: #d63384;
@@ -22,6 +24,7 @@
             font-size: 30px;
             color: #6c1338ee;
         }
+
         button{
             font-size: 20px;
             padding: 10px 25px;
@@ -37,37 +40,104 @@
             position: relative;
             transition: 0.1s;
         }
+
+        #gato {
+            width: 300px;
+            max-width: 80%;
+            margin-top: 15px;
+            border-radius: 15px;
+        }
     </style>
 </head>
+
 <body>
+
     <h1>Eu te amo minha vidaaaa !!!</h1>
+
     <p>Tenho um presente para você...</p>
-    <p>você quer saber o que é meu amor? ❤️</p>
-    
+
+    <p>Você quer saber o que é meu amor? ❤️</p>
+
     <button onclick="clicouSim()">Sim</button>
-    <button id="botaoNao" onmouseover="fugir()" ontouchstart="fugir()">Não</button>
+
+    <button id="botaoNao"
+            onmouseover="fugir()"
+            ontouchstart="fugir()">
+        Não
+    </button>
 
     <h2 id="resposta"></h2>
-    
+
     <script>
-    function clicouSim() {
 
-        document.getElementById('resposta').innerHTML = `
-            <p>Oba! Te amo muito! ❤️🥰</p>
-            <p>Para receber o seu presente... <a href="https://cataas.com/cat" target="_blank">clique aqui</a></p>
-        `;
-    }
+        let proximoGif = null;
 
-    function fugir() {
-        let botao = document.getElementById('botaoNao');
-        let larguraMax = window.innerWidth - 120;
-        let alturaMax = window.innerHeight - 120;
-        let x = Math.random() * (larguraMax > 0 ? larguraMax : 50);
-        let y = Math.random() * (alturaMax > 0 ? alturaMax : 50);
-        botao.style.position = 'absolute';
-        botao.style.left = x + 'px';
-        botao.style.top = y + 'px';
-    }
+        // Pré-carrega o próximo GIF
+        function carregarGif() {
+
+            const img = new Image();
+
+            img.src = "https://cataas.com/cat/gif?" + Date.now();
+
+            img.onload = function() {
+                proximoGif = img.src;
+            };
+        }
+
+        // Já começa carregando um GIF
+        carregarGif();
+
+
+        function clicouSim() {
+
+            let resposta = document.getElementById('resposta');
+
+            if (proximoGif) {
+
+                resposta.innerHTML = `
+                    <p>Obaaaa! Te amo muito! ❤️🥰</p>
+
+                    <p>
+                        Esse é o seu presente:
+                    </p>
+
+                    <img id="gato" src="${proximoGif}" alt="Gatinho fofo">
+                `;
+
+                // Enquanto ela vê esse gato,
+                // já carrega o próximo
+                proximoGif = null;
+                carregarGif();
+
+            } else {
+
+                resposta.innerHTML = `
+                    <p>Obaaaa! Te amo muito! ❤️🥰</p>
+
+                    <p>Seu presente está carregando... 🐱❤️</p>
+                `;
+
+                carregarGif();
+            }
+        }
+
+
+        function fugir() {
+
+            let botao = document.getElementById('botaoNao');
+
+            let larguraMax = window.innerWidth - 120;
+            let alturaMax = window.innerHeight - 120;
+
+            let x = Math.random() * (larguraMax > 0 ? larguraMax : 50);
+            let y = Math.random() * (alturaMax > 0 ? alturaMax : 50);
+
+            botao.style.position = 'absolute';
+            botao.style.left = x + 'px';
+            botao.style.top = y + 'px';
+        }
+
     </script>
+
 </body>
 </html>
